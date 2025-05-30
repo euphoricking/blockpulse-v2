@@ -1,0 +1,22 @@
+steps:
+  # Step 1: Upload DAG to Composer bucket
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['cp', 'dags/crypto_pipeline_dag.py', 'gs://us-central1-blockpulse-cryp-96d4960a-bucket/dags/']
+
+  # Step 2: Upload ETL scripts to Composer bucket
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['cp', '-r', 'etl/', 'gs://blockpulse-data-bucket/etl/']
+
+  # Step 3: Upload requirements.txt to Composer bucket
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['cp', 'requirements/requirements.txt', 'gs://blockpulse-data-bucket/requirements/']
+
+  # Step 4: Upload SQL script
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['cp', 'sql/create_tables.sql', 'gs://blockpulse-data-bucket/sql/']
+
+# Optional: trigger DAG via REST API or Cloud Function
+# - name: 'gcr.io/cloud-builders/curl'
+#   args: ['-X', 'POST', 'https://composer.googleapis.com/v1/projects/PROJECT_ID/locations/us-central1/environments/blockpulse-crypto-env/dags/crypto_etl_dag:trigger', ...]
+
+timeout: 600s
