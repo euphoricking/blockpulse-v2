@@ -15,7 +15,7 @@ steps:
   - name: 'gcr.io/cloud-builders/gsutil'
     args: ['cp', 'sql/create_tables.sql', 'gs://blockpulse-data-bucket/sql/']
 
-# Optional: trigger DAG via REST API or Cloud Function
+## Optional: trigger DAG via REST API or Cloud Function
 # - name: 'gcr.io/cloud-builders/curl'
 #   args: ['-X', 'POST', 'https://composer.googleapis.com/v1/projects/PROJECT_ID/locations/us-central1/environments/blockpulse-crypto-env/dags/crypto_etl_dag:trigger', ...]
 
